@@ -4,7 +4,7 @@ Main app element/container
 -->
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<dom-module id="my-app">
+<dom-module id="ohwa-app">
   <template>
     <style>
       :host {
@@ -20,17 +20,17 @@ Main app element/container
      * @polymer
      */
     class MyApp extends Polymer.Element {
-      static get is() { return 'my-app'; }
+      static get is() { return 'ohwa-app'; }
       static get properties() {
         return {
           prop1: {
             type: String,
-            value: 'my-app'
+            value: 'ohwa-app'
           }
         };
       }
     }
 
-    customElements.define('my-app', MyApp);
+    customElements.define('ohwa-app', OhwaApp);
   </script>
 </dom-module>
