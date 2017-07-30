@@ -1,0 +1,41 @@
+{
+  "entry": "index.html",
+
+  "shell": "src/my-app/my-app.html",
+
+  "extraDependencies": [
+      "manifest.json",
+      "bower_components/webcomponentsjs/*.js"
+  ],
+
+  "sources":[
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
+  ],
+
+  "builds": [
+    {
+      "name": "ohwa-build",
+      "addServiceWorker": true,
+      "insertPrefetchLinks": true,
+      "bundle": true,
+      "html": {
+        "minify": true
+      },
+      "js": {
+        "minify": true,
+        "compile": true 
+      },
+      "css": {
+        "minify": true
+      }
+    }
+  ],
+
+  "lint": {
+    "rules": [
+      "polymer-2"
+    ]
+  }
+}
