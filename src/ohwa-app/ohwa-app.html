@@ -77,7 +77,7 @@ Main app element/container
         let main = this;
         let resolvedPageUrl = this.resolveUrl(page + '-page.html');
 
-        Polymer.importHref(resolvedPageUrl, null, this._show404, true);
+        Polymer.importHref(resolvedPageUrl, null, this._show404.bind(this), true);
       }
 
       _routePageChanged(page) {
