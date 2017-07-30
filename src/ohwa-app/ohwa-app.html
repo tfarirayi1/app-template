@@ -2,16 +2,46 @@
 Main app element/container
 @tfarirayi1
 -->
+<!-- Polymer library dependencies -->
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<!-- Custom dependencies -->
+<link rel="import" href="../icons.html">
 
 <dom-module id="ohwa-app">
   <template>
     <style>
       :host {
         display: block;
+        text-align: center;
+        width: 100%;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+
+      <!-- Routing -->
+      <app-location 
+          route="{{route}}" 
+          url-space-regex="^[[rootPath]]"></app-location>
+      <app-route
+          route="{{route}}"
+          pattern="[[rootPath]]:page"
+          data="{{routeData}}"
+          tail="{{subroute}}"></app-route>
+      
+      <!-- Views -->        
+      <iron-pages 
+          selected="[[page]]" 
+          attr-for-selected="name" 
+          fallback-selection="home" 
+          role="main">
+
+        <my-view1 name="home"></my-view1>
+
+      </iron-pages>
+
+      <h2>[[prop1]]</h2>
   </template>
 
   <script>
@@ -19,16 +49,68 @@ Main app element/container
      * @customElement
      * @polymer
      */
-    class MyApp extends Polymer.Element {
+    class OhwaApp extends Polymer.Element {
       static get is() { return 'ohwa-app'; }
       static get properties() {
         return {
           prop1: {
             type: String,
             value: 'ohwa-app'
-          }
+          },
+          page: {
+            type: String,
+            reflectToAttribute: true,
+            observer: '_pageChanged'
+          },
+          routeData: Object,
+          subroute: String,
+          rootPath: String
         };
       }
+
+      _pageChanged() {
+        /** 
+         * Resolve scope
+         * Resolve page url for import */ 
+        let main = this;
+        let resolvedPageUrl = this.resolveUrl(page + '-page.html');
+
+        /**
+         * Scroll header to top on each page change
+         * Show progress bar */
+        main.$.header.scroll({
+          top: 0
+        });
+
+        main._showProgress();
+
+        /** 
+         * Hide progress bar on success
+         * Navigate to home on failure */
+        this.importHref(resolvedPageUrl, function() {
+            main._hideProgress();
+        }, this._routePageChanged, true);
+      }
+
+      _showProgress() {
+        let progress = document.querySelector('#progress');
+        progress.removeAttribute('loaded');
+      }
+
+      _hideProgress() {
+        let progress = document.querySelector('#progress');
+        progress.setAttribute('loaded', '');
+      }
+
+      _routePageChanged(page) {
+        this.page = page || ''
+      }
+
+      static get observers() {
+        return [
+          '_routePageChanged(routeData.page)'
+        ]
+      } 
     }
 
     customElements.define('ohwa-app', OhwaApp);
