@@ -68,42 +68,22 @@ Main app element/container
         };
       }
 
-      _pageChanged() {
+      _pageChanged(page) {
         /** 
          * Resolve scope
          * Resolve page url for import */ 
         let main = this;
         let resolvedPageUrl = this.resolveUrl(page + '-page.html');
 
-        /**
-         * Scroll header to top on each page change
-         * Show progress bar */
-        main.$.header.scroll({
-          top: 0
-        });
-
-        main._showProgress();
-
-        /** 
-         * Hide progress bar on success
-         * Navigate to home on failure */
-        this.importHref(resolvedPageUrl, function() {
-            main._hideProgress();
-        }, this._routePageChanged, true);
-      }
-
-      _showProgress() {
-        let progress = document.querySelector('#progress');
-        progress.removeAttribute('loaded');
-      }
-
-      _hideProgress() {
-        let progress = document.querySelector('#progress');
-        progress.setAttribute('loaded', '');
+        Polymer.importHref(resolvedPageUrl, null, this._show404, true);
       }
 
       _routePageChanged(page) {
-        this.page = page || ''
+        this.page = page || 'home'
+      }
+
+      _show404() {
+        this.page = 'view404'
       }
 
       static get observers() {
