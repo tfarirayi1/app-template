@@ -1,7 +1,7 @@
 {
   "entry": "index.html",
 
-  "shell": "src/my-app/my-app.html",
+  "shell": "src/ohwa-app/ohwa-app.html",
 
   "extraDependencies": [
       "manifest.json",
