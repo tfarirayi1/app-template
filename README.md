@@ -14,4 +14,5 @@ ____
   * Set Windows 8 tile-settings
 
 #### Polymer build compiles ES6 down to ES5.
+#### $ bower install, then $ polymer serve.
 
