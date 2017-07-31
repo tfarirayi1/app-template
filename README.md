@@ -14,7 +14,7 @@ ____
   * Generate and Set homescreen icons: 48x48, 72x72, 96x96, 144x144, 192x192
   * Set Windows 8 tile-settings
 
-#### Install dependencies: $ npm run dev && bower install
+#### Install dependencies: $ sudo npm run dev
 #### Serve un-built site: $ polymer serve
 #### Build project: $ polymer build
 #### Serve built site: $ polymer serve build/ohwa-build
