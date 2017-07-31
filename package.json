@@ -1,0 +1,22 @@
+{
+  "name": "ohwa-build",
+  "version": "1.0.0",
+  "description": "ohwa-build description",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npm install -g polymer-cli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tfarirayi1/app-template.git"
+  },
+  "keywords": [
+    "blank"
+  ],
+  "author": "@tfarirayi1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tfarirayi1/app-template/issues"
+  },
+  "homepage": "https://github.com/tfarirayi1/app-template#readme"
+}
